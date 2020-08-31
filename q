@@ -1,6 +1,0 @@
-● mongod.service - MongoDB Database Server
-     Loaded: loaded (/lib/systemd/system/mongod.service; disabled; vendor preset: enabled)
-     Active: inactive (dead)
-       Docs: https://docs.mongodb.org/manual
-
- 8月 31 22:09:41 asroc systemd[1]: [0;1;39m[0;1;31m[0;1;39m/lib/systemd/system/mongod.service:11: PIDFile= references a path below legacy directory /var/run/, updating /var/run/mongodb/mongod.pid → /run/mongodb/mongod.pid; please update the unit file accordingly.[0m
