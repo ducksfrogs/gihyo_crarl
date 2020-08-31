@@ -7,11 +7,13 @@ from pymongo import MongoClient
 
 
 def main():
+    client = MongoClient('localhost', 27017)
+    collection = client.scraping.ebooks
     collection.create_index('key', unique=True)
 
     session = requests.Session()
-    response = session.get('https:/gihyo.jp/db')
-    urls = s
+    response = session.get('https://gihyo.jp/db')
+    urls = scrape_list_page(response)
     for url in urls:
         key = extract_key(url)
         ebook = collection.find_one('key', unique=True)
@@ -50,3 +52,6 @@ def extract_key(url: str) -> str:
 
 def normal_spaces(s: str) -> str:
     return re.sub(r'\s+', '', s).strip()
+
+if __name__ == '__main__':
+    main()
