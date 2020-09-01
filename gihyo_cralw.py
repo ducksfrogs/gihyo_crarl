@@ -12,7 +12,7 @@ def main():
     collection.create_index('key', unique=True)
 
     session = requests.Session()
-    response = session.get('https://gihyo.jp/db')
+    response = session.get('https://gihyo.jp/dp')
     urls = scrape_list_page(response)
     for url in urls:
         key = extract_key(url)
