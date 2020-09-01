@@ -8,7 +8,7 @@ from pymongo import MongoClient
 
 def main():
     client = MongoClient('localhost', 27017)
-    collection = client.scraping.ebooks
+    collection = client.momon.emomok
     collection.create_index('key', unique=True)
 
     session = requests.Session()
@@ -16,9 +16,9 @@ def main():
     urls = scrape_list_page(response)
     for url in urls:
         key = extract_key(url)
-        ebook = collection.find_one('key', unique=True)
+        ebook = collection.find_one({'key': key})
         if not ebook:
-            time.sleep(1)
+            time.sleep(10)
             response = session.get(url)
             ebook = scrape_detail_page(response)
             collection.insert_one(ebook)
@@ -48,7 +48,7 @@ def scrape_detail_page(response: requests.Response) -> dict:
 
 def extract_key(url: str) -> str:
     m = re.search(r'/([^/]+)$', url)
-    return m.group
+    return m.group(1)
 
 def normal_spaces(s: str) -> str:
     return re.sub(r'\s+', '', s).strip()
